@@ -1,1 +1,1 @@
-module.exports.mongodb  = 'mongodb://localhost/myblog'
+module.exports.mongodb  = 'mongodb://localhost:27017/myblog'

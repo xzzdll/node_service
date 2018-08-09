@@ -1,5 +1,5 @@
 const Koa = require('koa')
-const router = require('koa-router')();
+const router = require('./router/index')
 const bodyParser = require('koa-bodyparser')
 const cors = require('koa2-cors');
 const session = require('koa-session');

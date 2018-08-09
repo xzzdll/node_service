@@ -1,16 +1,23 @@
 const Koa = require('koa')
 const router = require('koa-router')();
 const bodyParser = require('koa-bodyparser')
-const app = new Koa()
 const cors = require('koa2-cors');
+const session = require('koa-session');
+const mongoose = require('mongoose');
+const config = require('./config');
 
-router.get('/', function (ctx, next) {
-  ctx.body = "Hello koa";
+
+const app = new Koa()
+
+
+app.jsonSpaces = 0
+
+mongoose.connect(config.mongodb)
+mongoose.connection.on('error', console.error)
+mongoose.connection.on('open', () => {
+  console.log("------" + config.mongodb + "数据库连接成功！------");
+
 })
-router.post('/news', (ctx, next) => {
-  const { email } = ctx.request.body;
-  ctx.body = {"test":email}
-});
 
 app.use(bodyParser())
 app.use(cors());
@@ -18,8 +25,9 @@ app.use(cors());
 app.use(router.routes());
 // 作用： 这是官方文档的推荐用法,我们可以看到router.allowedMethods()用在了路由匹配router.routes()之后,所以在当所有路由中间件最后调用.此时根据ctx.status设置response响应头
 app.use(router.allowedMethods());
+app.use(session(app))
 
 
 app.listen(3000, () => {
-  console.log('[demo] start-quick is starting at port 3000')
+  console.log('application is starting at port 3000')
 })

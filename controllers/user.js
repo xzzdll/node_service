@@ -1,10 +1,8 @@
-const User = require('../models/user.js');
+const user = require('../models/user.js');
 
 exports.login = async function (ctx) {
   const { userName, passWord } = ctx.request.body
-  console.log({ username: userName, password: passWord });
-  const hasUser = await User.User.findOne({ "username": userName, "password": passWord })
-  console.log(hasUser);
+  const hasUser = await user.user.findOne({ "username": userName, "password": passWord })
   if (hasUser) {
     ctx.body = { "message": "登陆成功" }
   } else {

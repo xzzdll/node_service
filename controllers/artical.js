@@ -33,7 +33,7 @@ exports.create = async function (ctx) {
 exports.list = async function (ctx) {
   const articals = await artical.artical.find({ })
   if (articals.length !== 0) {
-    ctx.body = { "message": "查询成功", "status": "true" }
+    ctx.body = { "message": "查询成功", "status": "true" ,"list":articals}
   } else {
     ctx.body = { "message": "查询失败", "status": "false" }
   }

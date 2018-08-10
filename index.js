@@ -7,9 +7,7 @@ const mongoose = require('mongoose');
 const config = require('./config');
 const convert = require('koa-convert');
 
-
 const app = new Koa()
-
 
 app.jsonSpaces = 0
 

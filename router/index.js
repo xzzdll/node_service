@@ -1,11 +1,15 @@
 const router = require('koa-router')();
-const login = require('../controllers/user.js')
+const user = require('../controllers/user.js')
+const artical = require('../controllers/artical.js')
 
-router.post('/login', login.login)
+router.post('/login', user.login)
 
-router.post('/news', (ctx, next) => {
-  const { email } = ctx.request.body;
-  ctx.body = { "test": email + '111' }
-});
+router.post('/artical/delete',artical.delete);
+
+router.post('/artical/edit',artical.edit);
+
+router.post('/artical/create',artical.create);
+
+router.post('/artical/list',artical.list);
 
 module.exports = router

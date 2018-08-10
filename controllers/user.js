@@ -4,7 +4,7 @@ exports.login = async function (ctx) {
   const { userName, passWord } = ctx.request.body
   const hasUser = await user.account.findOne({ "username": userName, "password": passWord })
   if (hasUser) {
-    this.session.user = {
+    ctx.session.user = {
       "username": userName
     }
     ctx.body = { "message": "登陆成功", "status": "true" }

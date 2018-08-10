@@ -9,6 +9,8 @@ const convert = require('koa-convert');
 
 const app = new Koa()
 
+app.keys = ['some secret hurr'];
+
 app.jsonSpaces = 0
 
 mongoose.connect(config.mongodb, { useNewUrlParser: true })
@@ -18,10 +20,22 @@ mongoose.connection.on('open', () => {
 
 })
 
+const CONFIG = {
+  key: 'koa:sess',
+  maxAge: 86400000,
+  overwrite: true,
+  httpOnly: true,
+  signed: true,
+  rolling: false,
+  renew: false
+};
+
 app.use(convert.compose(
-  cors(),
+  cors({
+    credentials: true
+  }),
   bodyParser(),
-  session(app),
+  session(CONFIG, app),
   router.routes(),
   router.allowedMethods()
 ));

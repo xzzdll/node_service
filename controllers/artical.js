@@ -1,6 +1,10 @@
 const artical = require('../models/articalModel.js');
 
 exports.delete = async function (ctx) {
+  if (ctx.session.user === undefined) {
+    ctx.body = { "message": "未登录", "status": "false" }
+    return;
+  }
   const { id } = ctx.request.body
   const state = await artical.artical.remove({ "_id": id })
   if (state.ok === 1 && state.n !== 0) {
@@ -11,6 +15,10 @@ exports.delete = async function (ctx) {
 }
 
 exports.edit = async function (ctx) {
+  if (ctx.session.user === undefined) {
+    ctx.body = { "message": "未登录", "status": "false" }
+    return;
+  }
   const { id, content, title } = ctx.request.body
   const state = await artical.artical.update({ "_id": id }, { "content": content, "title": title })
   if (state.ok === 1 && state.n !== 0) {
@@ -21,6 +29,10 @@ exports.edit = async function (ctx) {
 }
 
 exports.create = async function (ctx) {
+  if (ctx.session.user === undefined) {
+    ctx.body = { "message": "未登录", "status": "false" }
+    return;
+  }
   const { content, title } = ctx.request.body
   const newArtical = await artical.artical.create({ "content": content, "title": title })
   if (newArtical._id) {
@@ -31,9 +43,13 @@ exports.create = async function (ctx) {
 }
 
 exports.list = async function (ctx) {
-  const articals = await artical.artical.find({ })
+  if (ctx.session.user === undefined) {
+    ctx.body = { "message": "未登录", "status": "false" }
+    return;
+  }
+  const articals = await artical.artical.find({})
   if (articals.length !== 0) {
-    ctx.body = { "message": "查询成功", "status": "true" ,"list":articals}
+    ctx.body = { "message": "查询成功", "status": "true", "list": articals }
   } else {
     ctx.body = { "message": "查询失败", "status": "false" }
   }

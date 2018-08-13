@@ -24,7 +24,7 @@ const CONFIG = {
   key: 'koa:sess',
   maxAge: 86400000,
   overwrite: true,
-  httpOnly: true,
+  httpOnly: false,
   signed: true,
   rolling: false,
   renew: false

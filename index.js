@@ -34,7 +34,7 @@ app.use(convert.compose(
   cors({
     credentials: true
   }),
-  bodyParser(),
+  bodyParser({jsonLimit:'50mb'}),
   session(CONFIG, app),
   router.routes(),
   router.allowedMethods()

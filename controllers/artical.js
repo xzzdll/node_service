@@ -43,11 +43,14 @@ exports.create = async function (ctx) {
 }
 
 exports.list = async function (ctx) {
-  if (ctx.session.user === undefined) {
-    ctx.body = { "message": "未登录", "status": "false" }
-    return;
+  let articals
+  const { id } = ctx.request.body
+  if (id) {
+    articals = await artical.artical.find({ "_id": id })
   }
-  const articals = await artical.artical.find({})
+  else {
+    articals = await artical.artical.find({})
+  }
   if (articals.length !== 0) {
     ctx.body = { "message": "查询成功", "status": "true", "list": articals }
   } else {

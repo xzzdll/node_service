@@ -19,8 +19,8 @@ exports.create = async function (ctx) {
     ctx.body = { "message": "未登录", "status": "false" }
     return;
   }
-  const { content, title } = ctx.request.body
-  const newSay = await say.say.create({ "content": content, "title": title })
+  const { content, date } = ctx.request.body
+  const newSay = await say.say.create({ "content": content, "date": date })
   if (newSay._id) {
     ctx.body = { "message": "新增成功", "status": "true" }
   } else {

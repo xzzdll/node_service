@@ -62,6 +62,14 @@ exports.list = async function(ctx) {
   const { id } = ctx.request.body;
   if (id) {
     articals = await artical.artical.find({ _id: id });
+    if (articals.length !== 0) {
+      await artical.artical.update(
+        { _id: id },
+        {
+          times: articals.times++
+        }
+      );
+    }
   } else {
     articals = await artical.artical.find({});
   }

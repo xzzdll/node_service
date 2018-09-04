@@ -5,7 +5,7 @@ const articalSchema = new Schema({
   title: { type: String },
   content: { type: String },
   date: { type: String },
-  times: { type: String },
+  times: { type: Number },
   type: { type: String }
 });
 

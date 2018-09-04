@@ -62,7 +62,7 @@ exports.list = async function(ctx) {
   if (id) {
     articals = await artical.artical.find({ _id: id });
     if (articals.length !== 0) {
-      await artical.artical.update(
+      artical.artical.update(
         { _id: id },
         {
           times: articals[0].times++

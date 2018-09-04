@@ -41,13 +41,13 @@ exports.create = async function(ctx) {
     ctx.body = { message: "未登录", status: "false" };
     return;
   }
-  const { content, title, type, date, times } = ctx.request.body;
+  const { content, title, type, date } = ctx.request.body;
   const newArtical = await artical.artical.create({
     content: content,
     title: title,
     type: type,
     date: date,
-    times: times
+    times: 0
   });
   if (newArtical._id) {
     ctx.body = { message: "新增成功", status: "true" };

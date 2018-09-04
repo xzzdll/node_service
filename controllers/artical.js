@@ -65,7 +65,7 @@ exports.list = async function(ctx) {
       await artical.artical.update(
         { _id: id },
         {
-          times: articals.times++
+          times: articals[0].times++
         }
       );
     }

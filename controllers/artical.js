@@ -19,15 +19,14 @@ exports.edit = async function(ctx) {
     ctx.body = { message: "未登录", status: "false" };
     return;
   }
-  const { id, content, title, type, date, times } = ctx.request.body;
+  const { id, content, title, type, date } = ctx.request.body;
   const state = await artical.artical.update(
     { _id: id },
     {
       content: content,
       title: title,
       type: type,
-      date: date,
-      times: times
+      date: date
     }
   );
   if (state.ok === 1 && state.n !== 0) {

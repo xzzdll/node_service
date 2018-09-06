@@ -58,7 +58,8 @@ exports.create = async function(ctx) {
 
 exports.list = async function(ctx) {
   let articals;
-  const { id } = ctx.request.body;
+  let amount = 0;
+  const { id, currentPage, pageSize } = ctx.request.body;
   if (id) {
     articals = await artical.artical.find({ _id: id });
     if (articals.length !== 0) {
@@ -70,10 +71,24 @@ exports.list = async function(ctx) {
       );
     }
   } else {
-    articals = await artical.artical.find({});
+    await artical.artical.countDocuments({}, (err, count) => {
+      amount = count;
+    });
+
+    articals = await artical.artical
+      .find({})
+      .limit(pageSize)
+      .skip((currentPage - 1) * pageSize)
+      .sort({ _id: -1 });
   }
+
   if (articals.length !== 0) {
-    ctx.body = { message: "查询成功", status: "true", list: articals };
+    ctx.body = {
+      message: "查询成功",
+      status: "true",
+      list: articals,
+      totalRows: amount
+    };
   } else {
     ctx.body = { message: "查询失败", status: "false" };
   }

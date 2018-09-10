@@ -58,7 +58,7 @@ exports.create = async function(ctx) {
 
 exports.list = async function(ctx) {
   let articals;
-  let amount = 0;
+  let amount;
   const { id, currentPage, pageSize } = ctx.request.body;
   if (id) {
     articals = await artical.artical.find({ _id: id });
@@ -71,9 +71,7 @@ exports.list = async function(ctx) {
       );
     }
   } else {
-    await artical.artical.countDocuments({}, (err, count) => {
-      amount = count;
-    });
+    amount = await artical.artical.countDocuments({});
 
     articals = await artical.artical
       .find({})

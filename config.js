@@ -1,1 +1,1 @@
-module.exports.mongodb  = 'mongodb://127.0.0.1:27017/myblog'
+module.exports.mongodb  = 'mongodb://47.98.115.136:27017/myblog'

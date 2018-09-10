@@ -19,5 +19,6 @@ router.post('/say/list',say.list);
 router.post('/say/create',say.create);
 
 router.post('/add/visitor',visitor.add);
+router.post('/count/visitor',visitor.count);
 
 module.exports = router

@@ -11,6 +11,18 @@ exports.add = async function(ctx) {
   }
 };
 
+exports.count = async function(ctx) {
+  let amount = 0;
+  await artical.artical.countDocuments({}, (err, count) => {
+    amount = count;
+  });
+  if (amount) {
+    ctx.body = { message: "查询成功", status: "true", count: amount };
+  } else {
+    ctx.body = { message: "无数据", status: "true", count: amount };
+  }
+};
+
 // exports.delete = async function (ctx) {
 //   if (ctx.session.user === undefined) {
 //     ctx.body = { "message": "未登录", "status": "false" }

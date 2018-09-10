@@ -12,14 +12,11 @@ exports.add = async function(ctx) {
 };
 
 exports.count = async function(ctx) {
-  let amount = 0;
-  await visitor.visitor.countDocuments({}, (err, count) => {
-    amount = count;
-  });
-  if (amount) {
-    ctx.body = { message: "查询成功", status: "true", count: amount };
+  let count = await visitor.visitor.countDocuments({});
+  if (count) {
+    ctx.body = { message: "查询成功", status: "true", count: count };
   } else {
-    ctx.body = { message: "无数据", status: "true", count: amount };
+    ctx.body = { message: "无数据", status: "true", count: count };
   }
 };
 

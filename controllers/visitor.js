@@ -1,4 +1,4 @@
-const user = require("../models/visitorModel.js");
+const visitor = require("../models/visitorModel.js");
 
 exports.add = async function(ctx) {
   const { ip, city } = ctx.request.body;
@@ -13,7 +13,7 @@ exports.add = async function(ctx) {
 
 exports.count = async function(ctx) {
   let amount = 0;
-  await artical.artical.countDocuments({}, (err, count) => {
+  await visitor.visitor.countDocuments({}, (err, count) => {
     amount = count;
   });
   if (amount) {

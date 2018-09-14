@@ -78,6 +78,9 @@ exports.list = async function(ctx) {
       .limit(pageSize)
       .skip((currentPage - 1) * pageSize)
       .sort({ _id: -1 });
+      articals.list.forEach((tmp) => {
+        tmp.content = tmp.content.substring(0, 200) + '...';
+      });
   }
 
   if (articals.length !== 0) {

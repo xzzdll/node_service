@@ -86,7 +86,7 @@ exports.list = async function(ctx) {
         allStr += strArr[i];
         if (strArr[i] !== " ") {
           whole++;
-          if (whole === 1000) {
+          if (whole === 800) {
             break;
           }
         }

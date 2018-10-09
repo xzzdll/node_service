@@ -78,9 +78,21 @@ exports.list = async function(ctx) {
       .limit(pageSize)
       .skip((currentPage - 1) * pageSize)
       .sort({ _id: -1 });
-      articals.forEach((tmp) => {
-        tmp.content = tmp.content.substring(0, 200) + '...';
-      });
+    articals.forEach(tmp => {
+      let whole = 0;
+      let allStr = "";
+      let strArr = tmp.content.split("");
+      for (let i = 0; i < strArr.length; i++) {
+        allStr += strArr[i];
+        if (strArr[i] !== " ") {
+          whole++;
+          if (whole === 200) {
+            break;
+          }
+        }
+      }
+      tmp.content = allStr;
+    });
   }
 
   if (articals.length !== 0) {

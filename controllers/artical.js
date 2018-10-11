@@ -91,7 +91,7 @@ exports.list = async function(ctx) {
           }
         }
       }
-      tmp.content = allStr + "<span>....</span>";
+      tmp.content = allStr;
     });
   }
 

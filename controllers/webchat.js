@@ -10,7 +10,7 @@ let config = {
 
 exports.check = async function(ctx) {
   const { signature, timestamp, echostr, nonce } = ctx.request.body;
-  console.log(signature, timestamp, echostr, nonce)
+  console.log(ctx.request.body,signature)
   let token = config.wechat.token;
   let str = [token, timestamp, nonce].sort().join("");
   let sha = sha1(str);

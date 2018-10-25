@@ -23,6 +23,5 @@ router.post('/add/visitor',visitor.add);
 router.post('/count/visitor',visitor.count);
 
 router.get('/webchat/check',webchat.check);
-router.post('/webchat/check',webchat.check);
 
 module.exports = router

@@ -9,7 +9,7 @@ let config = {
 };
 
 exports.check = async function(ctx) {
-  const { signature, timestamp, echostr, nonce } = ctx.request.body;
+  const { signature, timestamp, echostr, nonce } = ctx.request;
   console.log(ctx.request,signature)
   let token = config.wechat.token;
   let str = [token, timestamp, nonce].sort().join("");

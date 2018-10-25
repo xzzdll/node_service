@@ -9,11 +9,11 @@ let config = {
 };
 
 exports.check = async function(ctx) {
-  const { signature, timestamp, echostr, nonce } = ctx.request;
-  console.log(ctx.request,this.query)
+  const { signature, timestamp, echostr, nonce } = ctx.request.query;
   let token = config.wechat.token;
   let str = [token, timestamp, nonce].sort().join("");
   let sha = sha1(str);
+  console.log(sha,signature)
 
   if (sha === signature) {
     ctx.body = echostr + "";

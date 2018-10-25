@@ -3,6 +3,7 @@ const user = require('../controllers/user.js')
 const artical = require('../controllers/artical.js')
 const say = require('../controllers/say.js')
 const visitor = require('../controllers/visitor.js')
+const webchat = require('../controllers/webchat.js')
 
 router.post('/login', user.login);
 router.post('/user/create', user.create)
@@ -20,5 +21,7 @@ router.post('/say/create',say.create);
 
 router.post('/add/visitor',visitor.add);
 router.post('/count/visitor',visitor.count);
+
+router.get('/webchat/check',webchat.check);
 
 module.exports = router

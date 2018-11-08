@@ -79,19 +79,12 @@ exports.list = async function(ctx) {
       .skip((currentPage - 1) * pageSize)
       .sort({ _id: -1 });
     articals.forEach(tmp => {
-      let whole = 0;
-      let allStr = "";
-      let strArr = tmp.content.split("");
-      for (let i = 0; i < strArr.length; i++) {
-        allStr += strArr[i];
-        if (strArr[i] !== " ") {
-          whole++;
-          if (whole === 300) {
-            break;
-          }
-        }
-      }
-      tmp.content = allStr;
+      tmp.content = tmp.content.replace(/(\n)/g, '');
+      tmp.content = tmp.content.replace(/(\t)/g, '');
+      tmp.content = tmp.content.replace(/(\r)/g, '');
+      tmp.content = tmp.content.replace(/<\/?[^>]*>/g, '');
+      tmp.content = tmp.content.replace(/\s*/g, '');
+      tmp.content = tmp.content.substring(0, 200);
     });
   }
 

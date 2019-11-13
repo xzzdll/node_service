@@ -10,11 +10,14 @@
   },
   "dependencies": {
     "koa": "^2.5.2",
+    "koa-body": "^4.1.1",
     "koa-bodyparser": "^3.2.0",
     "koa-compress": "^3.0.0",
     "koa-convert": "^1.2.0",
     "koa-router": "^7.4.0",
     "koa-session": "^3.3.1",
+    "koa-static": "^5.0.0",
+    "koa-static-server": "^1.4.0",
     "koa2-cors": "^2.0.6",
     "mongoose": "^5.2.7",
     "node-sha1": "^1.0.1"

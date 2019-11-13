@@ -7,12 +7,19 @@ const mongoose = require("mongoose");
 const config = require("./config");
 const convert = require("koa-convert");
 const compress = require("koa-compress");
+const koaBody = require('koa-body');
+const serve = require('koa-static-server')
+const path = require("path");
 
 const app = new Koa();
 
 app.keys = ["some secret hurr"];
 
 app.jsonSpaces = 0;
+
+const staticPath = './upload'
+
+const uploadPath = path.join(__dirname, staticPath)
 
 mongoose.connect(
   config.mongodb,
@@ -39,9 +46,16 @@ app.use(
       credentials: true
     }),
     bodyParser({ jsonLimit: "50mb", formLimit: "50mb" }),
+    koaBody({
+      multipart: true,
+      formidable: {
+        maxFileSize: 200 * 1024 * 1024    // 设置上传文件大小最大限制，默认2M
+      }
+    }),
     session(CONFIG, app),
     router.routes(),
     router.allowedMethods(),
+    serve({ rootDir: 'upload', rootPath: '/upload' }),
     compress({ threshold: 2048 })
   )
 );
